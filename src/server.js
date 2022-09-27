@@ -38,7 +38,7 @@ app.post('/signin', basicAuth, async (req, res) => {
 });
 
 app.get('/protected', basicAuth, async (req, res) => {
-  res.status(200).json('This is a protected branch. You have access!');
+  res.status(200).json('This is a protected route. You have access!');
 });
 
 app.use('*', notFound);
