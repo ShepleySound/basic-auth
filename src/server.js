@@ -6,6 +6,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const { Users } = require('./app');
 const basicAuth = require('./middleware/basic-auth');
+const errorHandler = require('./middleware/error-handlers/500');
+
 
 // Processes JSON requests
 app.use(express.json());
@@ -31,9 +33,12 @@ app.post('/signup', async (req, res) => {
 // test with httpie
 // http post :3000/signin -a john:foo
 app.post('/signin', basicAuth, async (req, res) => {
-  res.status(200).json(req);
+  res.status(200).json(req.body)
 
 
 });
+
+app.use(errorHandler);
+
 
 module.exports = { app };
