@@ -1,6 +1,5 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
 const { User } = require('../../app');
 
 module.exports = async (req, res, next) => {

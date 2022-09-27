@@ -14,6 +14,10 @@ app.use(express.json());
 // Processes FORM requests
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.status(200).send('Welcome to the server!');
+});
+
 // Signup Route -- create a new user
 // Two ways to test this route with httpie
 // echo '{"username":"john","password":"foo"}' | http post :3000/signup
