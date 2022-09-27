@@ -1,0 +1,50 @@
+openapi: "3.0.2"
+info:
+  title: Basic Auth
+  version: "1.0"
+servers:
+  - url: http://localhost:3002
+paths:
+  /signup:
+    post:
+      requestBody:
+        required: false
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Invalid Credentials
+  /signin:
+    post:
+      security:
+        - BasicAuth: []
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Invalid Credentials
+  /protected:
+    get:
+      security:
+        - BasicAuth: []
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Unauthorized Access
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    User:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
