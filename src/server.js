@@ -3,7 +3,6 @@
 const express = require('express');
 
 const app = express();
-const bcrypt = require('bcrypt');
 const { User } = require('./app');
 const basicAuth = require('./auth/middleware/basic-auth');
 const errorHandler = require('./middleware/error-handlers/500');
@@ -22,7 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/signup', async (req, res) => {
 
   try {
-    req.body.password = await bcrypt.hash(req.body.password, 10);
     const record = await User.create(req.body);
     res.status(201).json(record);
   } catch (e) { res.status(403).send('Error Creating User'); }
