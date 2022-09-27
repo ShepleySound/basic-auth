@@ -4,9 +4,9 @@ A basic authentication/authorization implementation using NodeJS, Express, and P
 
 Author: Robert Shepley
 <!-- Replace URL's and add more necessary links -->
-- [Tests Report](URL)
-- [Assignment Pull Request](URL)
-- [Heroku Prod Deployment](URL)
+- [Tests Report](https://github.com/ShepleySound/basic-auth/actions/runs/3132654742)
+- [Recent Major PR](https://github.com/ShepleySound/basic-auth/pull/1)
+<!-- - [Heroku Prod Deployment](URL) -->
 
 ## Setup
 
@@ -40,32 +40,61 @@ Author: Robert Shepley
 
 - Congratulations! You should now be able to access the application in your browser by navigating to `http://localhost:PORT/`, with `PORT` being the port number that you specified in the .env.
 
-### Endpoints
+## API
 
-- Endpoint: `/`
-  - Response: `Welcome to the server!`
+### /signup
 
-- Endpoint: `/signup`
-  - POST
-    - 
-- Endpoint: `/signin`
-  
-```json
-  {
-    "error": 500,
-    "route": "/bad",
-    "query": {},
-    "message": "Bad endpoint"
-  }
-```
+#### POST
+
+##### Responses
+
+| Code | Description |
+| ---- | ----------- |
+| 201 | OK |
+| 401 | Unauthorized |
+
+### /signin
+
+#### POST
+
+##### Responses
+
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | OK |
+| 401 | Unauthorized |
+
+##### Security
+
+| Security Schema
+| --- |
+| BasicAuth |
+
+### /protected
+
+#### GET
+
+##### Responses
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | OK |
+| 401 | Unauthorized |
+
+##### Security
+
+| Security Schema
+| --- |
+| BasicAuth |
 
 ## Tests
 
 - Unit Tests: `npm run test`
 - Lint Tests: `npm run lint`
 
-## UML
+<!-- ## UML
 
-(Created with [diagrams](https://app.diagrams.net/))
+(Created with [diagrams](https://app.diagrams.net/)) -->
 
-![UML Image](URL)
+<!-- ![UML Image](URL) -->
