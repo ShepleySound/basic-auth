@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
     const user = await Users.findOne({ where: { username: username } });
     const valid = await bcrypt.compare(password, user.password);
     if (valid) {
-      res.status(200).json(user);
+      next();
     }
     else {
       throw new Error('Invalid User');

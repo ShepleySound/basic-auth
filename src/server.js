@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const { Users } = require('./app');
 const basicAuth = require('./middleware/basic-auth');
 const errorHandler = require('./middleware/error-handlers/500');
+const notFound = require('./middleware/error-handlers/404');
 
 
 // Processes JSON requests
@@ -33,10 +34,14 @@ app.post('/signup', async (req, res) => {
 // test with httpie
 // http post :3000/signin -a john:foo
 app.post('/signin', basicAuth, async (req, res) => {
-  res.status(200).json(req.body)
-
-
+  res.status(200).json('hello there!');
 });
+
+app.get('/protected', basicAuth, async (req, res) => {
+  res.status(200).json('This is a protected branch. You have access!');
+});
+
+app.use('*', notFound);
 
 app.use(errorHandler);
 
