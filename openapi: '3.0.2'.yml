@@ -16,7 +16,7 @@ paths:
       responses:
         "200":
           description: OK
-        "403":
+        "401":
           description: Invalid Credentials
   /signin:
     post:
@@ -25,7 +25,7 @@ paths:
       responses:
         "200":
           description: OK
-        "403":
+        "401":
           description: Invalid Credentials
   /protected:
     get:
@@ -34,7 +34,7 @@ paths:
       responses:
         "200":
           description: OK
-        "403":
+        "401":
           description: Unauthorized Access
 components:
   securitySchemes:

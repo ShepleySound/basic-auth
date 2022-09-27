@@ -27,7 +27,7 @@ app.post('/signup', async (req, res) => {
   try {
     const record = await User.create(req.body);
     res.status(201).json(record);
-  } catch (e) { res.status(403).send('Error Creating User'); }
+  } catch (error) { res.status(401).send('Error Creating User'); }
 });
 
 
