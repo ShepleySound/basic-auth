@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
     let [username, password] = decodedString.split(':'); // username, password
     
     const user = await User.findOne({ where: { username: username } });
-    const valid = await bcrypt.compare(password, user.password);
+    const valid = await user.validateLogin(password);
     if (valid) {
       req.body.user = user;
       next();
