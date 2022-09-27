@@ -53,7 +53,7 @@ describe('Test auth functionality', () => {
     const response = await (await request
       .post('/signin')
       .set('Authorization', 'basic ' + encodedAuth));
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(401);
   });
 
   test('Access protected route with valid auth header.', async () => {
@@ -69,7 +69,7 @@ describe('Test auth functionality', () => {
     const response = await (await request
       .get('/protected')
       .set('Authorization', 'basic ' + encodedAuth));
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(401);
   });
 
 });
