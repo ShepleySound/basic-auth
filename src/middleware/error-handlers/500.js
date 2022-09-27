@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (err, req, res, next) => {
-  res.status(500).send({
+  res.status(500).json({
     error: 500,
     query: req.query,
     body: req.body,

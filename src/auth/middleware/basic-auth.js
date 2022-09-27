@@ -1,7 +1,7 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const { Users } = require('../app');
+const { User } = require('../../app');
 
 module.exports = async (req, res, next) => {
   /*
@@ -29,13 +29,14 @@ module.exports = async (req, res, next) => {
     let decodedString = Buffer.from(encodedString, 'base64').toString('ascii');
     let [username, password] = decodedString.split(':'); // username, password
     
-    const user = await Users.findOne({ where: { username: username } });
+    const user = await User.findOne({ where: { username: username } });
     const valid = await bcrypt.compare(password, user.password);
     if (valid) {
+      req.body.user = user;
       next();
     }
     else {
       throw new Error('Invalid User');
     }
-  } catch (error) { res.status(403).send('Invalid Login'); }
+  } catch (error) { res.status(403).json('Invalid Login'); }
 };

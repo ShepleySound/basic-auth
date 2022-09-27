@@ -4,11 +4,10 @@ const express = require('express');
 
 const app = express();
 const bcrypt = require('bcrypt');
-const { Users } = require('./app');
-const basicAuth = require('./middleware/basic-auth');
+const { User } = require('./app');
+const basicAuth = require('./auth/middleware/basic-auth');
 const errorHandler = require('./middleware/error-handlers/500');
 const notFound = require('./middleware/error-handlers/404');
-
 
 // Processes JSON requests
 app.use(express.json());
@@ -24,8 +23,8 @@ app.post('/signup', async (req, res) => {
 
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
-    const record = await Users.create(req.body);
-    res.status(200).json(record);
+    const record = await User.create(req.body);
+    res.status(201).json(record);
   } catch (e) { res.status(403).send('Error Creating User'); }
 });
 
@@ -34,7 +33,7 @@ app.post('/signup', async (req, res) => {
 // test with httpie
 // http post :3000/signin -a john:foo
 app.post('/signin', basicAuth, async (req, res) => {
-  res.status(200).json('hello there!');
+  res.status(200).json(`Hello ${req.body.user.username}!`);
 });
 
 app.get('/protected', basicAuth, async (req, res) => {
@@ -44,6 +43,5 @@ app.get('/protected', basicAuth, async (req, res) => {
 app.use('*', notFound);
 
 app.use(errorHandler);
-
 
 module.exports = { app };

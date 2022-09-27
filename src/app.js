@@ -11,19 +11,6 @@ const { Sequelize, DataTypes } = require('sequelize');
 const DATABASE_URL = 'sqlite::memory';
 
 const sequelizeDB = new Sequelize(DATABASE_URL);
+const User = require('./auth/models/user-model')(sequelizeDB, DataTypes);
 
-// Create a Sequelize model
-const Users = sequelizeDB.define('User', {
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
-
-
-module.exports = { sequelizeDB, Users };
+module.exports = { sequelizeDB, User };
